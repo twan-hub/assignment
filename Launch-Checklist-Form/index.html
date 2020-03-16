@@ -1,0 +1,96 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Launch Checklist</title>
+        <link rel = "stylesheet" type = "text/css" href = "styles.css" />
+        <script src = "script.js"></script>
+    </head>
+    <body>
+        <h1>Launch Checklist Form</h1>
+        <div id="missionTarget">
+            <!-- Fetch some planetary data -->
+        </div> 
+        <div id="launchForm">
+            <form>
+                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center; margin: 8 0;">
+                    <label>Pilot Name <input type="text" name="pilotName" id="pilotName" /></label>
+                </div>
+                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center; margin: 8 0;">
+                    <label>Co-pilot Name <input type="text" name="copilotName" id='copilotName' /></label>
+                </div>
+                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center; margin: 8 0;">
+                    <label>Fuel Level (L) <input type="text" name="fuelLevel" id='fuelLevel'/></label> 
+                </div>
+                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center; margin: 8 0;">
+                    <label>Cargo Mass (kg) <input type="text" name="cargoMass" id='cargoMass'/></label>
+                </div>
+                <button id="formSubmit">Submit</button>
+                <script>
+                    document.getElementById('formSubmit').addEventListener("click",myFunction);
+                    function myFunction(e){
+                        var pilotName = document.getElementById('pilotName');
+                        var copilotName = document.getElementById('copilotName');
+                        var fuelLevel = document.getElementById('fuelLevel');
+                        var cargoMass = document.getElementById('cargoMass');
+                        var formSubmit = document.getElementById('formSubmit');
+                        var num=0;
+                        var faultyItems = document.getElementById('faultyItems');
+
+                        if (pilotName.value==''||pilotName.value==null){
+                            alert('Forgot to enter your name pilot!');
+                        }else if(!(isNaN(pilotName.value))){
+                            alert("You've enterd something other than letters in pilot's name!")
+                        }else{
+                            num+=1;
+                        }
+                        if (copilotName.value==''||copilotName.value==null){
+                            alert('Forgot to enter your name co-pilot!');
+                        }else if(!(isNaN(copilotName.value))){
+                            alert("You've enterd something other than letters in co-pilot's name!")
+                        }else{
+                            num+=1;
+                        }
+                        if (fuelLevel.value==null || fuelLevel.value==''){
+                            alert('Forgot to enter a value for fuel Level!');
+                        }else if(isNaN(fuelLevel.value)){
+                            alert("You've enterd something other than a number in fuel level!")
+                        }else{
+                            num+=1
+                        }
+                        if (cargoMass.value==null || cargoMass.value==''){
+                            alert('Forgot to enter a value for cargo mass!');
+                        }else if(isNaN(cargoMass.value)){
+                            alert("You've enterd something other than a number in cargo mass!")
+                        }else{
+                            num+=1
+                        }
+
+                        if(num!==4){
+                           e.preventDefault(); 
+                        }
+
+                        var pilotStatus = document.getElementById('pilotStatus');
+                        var copilotStatus = document.getElementById('copilotStatus');
+                        var fuelStatus = document.getElementById('fuelStatus');
+                        var cargoStatus = document.getElementById('cargoStatus');
+                        var ray=[pilotStatus,copilotStatus,fuelStatus,cargoStatus];
+
+                        
+                        
+                    }
+                </script>
+            </form>
+        </div>
+        <div id="launchStatusCheck">
+            <h2 id="launchStatus">Awaiting Information Before Launch</h2>
+            <div  id="faultyItems">
+                <ol>
+                    <li id="pilotStatus">Pilot Ready</li>
+                    <li id="copilotStatus">Co-pilot Ready</li>
+                    <li id="fuelStatus">Fuel level high enough for launch</li>
+                    <li id="cargoStatus">Cargo mass low enough for launch</li>
+                </ol>
+            </div>
+        </div>    
+    </body>
+</html>
